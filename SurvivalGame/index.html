@@ -1,26 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./style.css">
-    <title>Document</title>
+    <title>Farm Game</title>
 </head>
-
 <body>
+
+    <div id="notification" class="notification"></div>
 
     <div class="navigation" id="navigation">
 
-        <div class="curtain_left" id="cl"></div>
-        <div class="curtain_right" id="cr"></div>
-
-
         <div class="inventoryTitle">
-
-            INVENTORY
-
+            📦 Инвентарь
             <div class="inventory">
                 <div class="items"></div>
                 <div class="items"></div>
@@ -43,62 +37,44 @@
             </div>
         </div>
 
-
         <div class="stats" id="stats">
 
-            <div class="status">
-
-                <div class="hunger-bar" id="hunger-bar"></div>
-
-
+            <div class="statRow">
+                <span class="statIcon">🍖</span>
+                <div class="status">
+                    <div class="hunger-bar" id="hunger-bar"></div>
+                </div>
+                <span class="statValue" id="hunger-val">100</span>
             </div>
 
-            <div class="status">
-
-                <div class="energy-bar" id="energy-bar"></div>
-
+            <div class="statRow">
+                <span class="statIcon">⚡</span>
+                <div class="status">
+                    <div class="energy-bar" id="energy-bar"></div>
+                </div>
+                <span class="statValue" id="energy-val">100</span>
             </div>
 
         </div>
 
-        <div class="days" id="days">
+        <div class="hud-panel days" id="days">День 1</div>
 
-            1
+        <div class="hud-panel gold" id="gold-display">0g</div>
 
-        </div>
+        <div class="resetBtn" onclick="resetGame()" title="Новая игра">↺</div>
 
+        <div id="modal" class="modal"></div>
 
-        <div id="modal" class="modal">
-
-
-
-
-        </div>
-
+        <div class="curtain_left"  id="cl"></div>
+        <div class="curtain_right" id="cr"></div>
 
         <div class="playground" id="playground">
-
-            <div class="trees"></div>
-            <div class="blueprint" onclick="showUpgrades()"></div>
-            <div class="pointerHome" onclick="showTeleports ()"></div>
-            <div class="fire"></div>
-            <div class="boiler" onclick="showRecepts()"></div>
-            <div class="skyHome"></div>
-            <div class="birdsHome"></div>
-            <div class="bed" onclick="goToSleep ()"></div>
-
-
+            <div class="pointerHome" onclick="showTeleports()"></div>
         </div>
-
 
     </div>
 
-
-
-
-
-    <script src="./script.js"></script>
+<script src="./script.js"></script>
 
 </body>
-
 </html>

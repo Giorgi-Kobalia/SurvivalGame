@@ -3,205 +3,180 @@
     user-select: none;
 }
 
-/* -------------------------------------------------------------------------------------------------------------------------------------- */
+html, body {
+    overflow: hidden;
+    margin: 0;
+    padding: 0;
+}
 
+body {
+    background-color: #0d0a06;
+    font-family: Georgia, 'Times New Roman', serif;
+}
+
+/* ================================================================ NOTIFICATION */
+
+.notification {
+    position: fixed;
+    top: 28px;
+    left: 50%;
+    transform: translateX(-50%) translateY(-8px);
+    background: linear-gradient(135deg, rgba(35,20,5,0.97), rgba(60,35,8,0.97));
+    color: #f4d060;
+    padding: 10px 28px;
+    border-radius: 30px;
+    border: 1.5px solid #c8961e;
+    font-size: 20px;
+    font-family: Georgia, serif;
+    z-index: 100;
+    opacity: 0;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,220,80,0.12);
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    pointer-events: none;
+    white-space: nowrap;
+    letter-spacing: 0.5px;
+}
+
+.notification.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+}
+
+/* ================================================================ MODAL */
 
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 3; 
-    padding-top: 300px; 
+    display: none;
+    position: fixed;
+    z-index: 10;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    overflow: auto; 
-    background-color: rgb(0,0,0);
-    background-color: rgba(0,0,0,0.4); 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.55);
+    backdrop-filter: blur(2px);
 }
-   
 
-/* -------------------------------------------------------------------------------------------------------------------------------------- */
+.modalContent {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    min-width: 420px;
+    background: linear-gradient(160deg, #2a1508, #3d2010);
+    border: 2px solid #c8961e;
+    border-radius: 12px;
+    box-shadow: 0 16px 48px rgba(0,0,0,0.75), inset 0 1px 0 rgba(255,220,80,0.08);
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
+    padding: 18px;
+}
 
+.modalButtons {
+    width: 120px;
+    height: 90px;
+    display: flex;
+    flex-direction: column;
+    border: 1.5px solid #a07030;
+    border-radius: 8px;
+    justify-content: center;
+    align-items: center;
+    font-size: 18px;
+    font-family: Georgia, serif;
+    text-align: center;
+    cursor: pointer;
+    color: #f4d060;
+    background: linear-gradient(160deg, #3d2010, #5a3018);
+    transition: all 0.15s ease;
+}
 
+.modalButtons:hover {
+    background: linear-gradient(160deg, #5a3018, #7a4820);
+    border-color: #f0d060;
+    transform: scale(1.06);
+    box-shadow: 0 4px 14px rgba(200,150,30,0.3);
+}
 
+.modalButtons.disabled {
+    opacity: 0.32;
+    cursor: default;
+}
 
+.modalButtons.disabled:hover {
+    background: linear-gradient(160deg, #3d2010, #5a3018);
+    border-color: #a07030;
+    transform: none;
+    box-shadow: none;
+}
 
-/* -------------------------------------------------------------------------------------------------------------------------------------- */
+.modalButtons small {
+    font-size: 12px;
+    color: #c8a060;
+    margin-top: 5px;
+}
 
+.upgrades-title {
+    width: 100%;
+    text-align: center;
+    color: #f4d060;
+    font-size: 16px;
+    letter-spacing: 2px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid #a07030;
+    margin-bottom: 4px;
+}
+
+/* ================================================================ CURTAINS */
 
 .curtain_left {
-    width: 50%;
-    height: 100%;
-    background-color: black;
-    position: absolute;
-    left: -50%;
-    z-index: 4;
+    width: 51vw;
+    height: 100vh;
+    background-color: #0d0a06;
+    position: fixed;
+    left: -51vw;
+    top: 0;
+    z-index: 20;
     animation: go_right 4s linear;
 }
 
 .curtain_right {
-    width: 50%;
-    height: 100%;
-    background-color: black;
-    position: absolute;
-    right: -50%;
-    z-index: 4;
+    width: 51vw;
+    height: 100vh;
+    background-color: #0d0a06;
+    position: fixed;
+    right: -51vw;
+    top: 0;
+    z-index: 20;
     animation: go_left 4s linear;
 }
 
 @keyframes go_right {
-    0% {
-        transform: translateX(0%);
-    }
-
-    40% {
-        transform: translateX(+100%);
-    }
-
-    60% {
-        transform: translateX(+100%);
-    }
-
-    100% {
-        transform: translateX(0%);
-    }
-
+    0%   { transform: translateX(0%);    }
+    40%  { transform: translateX(100%);  }
+    60%  { transform: translateX(100%);  }
+    100% { transform: translateX(0%);    }
 }
 
 @keyframes go_left {
-    0% {
-        transform: translateX(0%);
-    }
-
-    40% {
-        transform: translateX(-100%);
-    }
-
-    60% {
-        transform: translateX(-100%);
-    }
-
-    100% {
-        transform: translateX(0%);
-    }
-
+    0%   { transform: translateX(0%);    }
+    40%  { transform: translateX(-100%); }
+    60%  { transform: translateX(-100%); }
+    100% { transform: translateX(0%);    }
 }
+
+/* ================================================================ LAYOUT */
 
 .navigation {
     overflow: hidden;
-    margin: 0px 40px;
+    margin: 20px 40px;
     width: 1830px;
     height: 920px;
     position: absolute;
     display: flex;
     pointer-events: all;
-}
-
-.inventoryTitle {
-    margin: 10px;
-    width: 200px;
-    height: 100px;
-    border: 2px solid black;
-    position: absolute;
-    z-index: 2;
-    display: flex;
-    flex-direction: wrap;
-    justify-content: center;
-    align-items: center;
-    font-size: 30px;
-}
-
-.inventory {
-    padding: 10px;
-    top: 95px;
-    width: 200px;
-    height: 800px;
-    position: absolute;
-    z-index: 2;
-    flex-wrap: wrap;
-    display: none;
-}
-
-.inventoryTitle:hover .inventory {
-    display: flex;
-}
-
-.items {
-    margin: 5px;
-    width: 80px;
-    height: 75px;
-    background-color: black;
-}
-
-.stats {
-    margin: 10px;
-    width: 400px;
-    height: 100px;
-    position: absolute;
-    z-index: 2;
-    left: 300px;
-    display: flex;
-    flex-wrap: wrap;
-    border: 2px solid black;
-}
-
-.status {
-    margin: 10px;
-    width: 380px;
-    height: 30px;
-    border: 2px solid black;
-    font-size: 20px;
-}
-
-.hunger-bar {
-    background-color: green;
-    height: 100%;
-
-}
-
-.energy-bar {
-    background-color: blue;
-    height: 100%;
-}
-
-.days {
-    margin: 10px;
-    width: 200px;
-    height: 100px;
-    border: 2px solid black;
-    position: absolute;
-    z-index: 2;
-    left: 800px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    font-size: 60px;
-}
-
-
-.modalContent {
-    margin: 10px;
-    width: 680px;
-    height: 100px;
-    background-color: wheat;
-    border: 2px solid black;
-    position: absolute;
-    left: 580px;
-    top: 300px;
-    justify-content: space-between;
-    display: flex;
-}
-
-.modalButtons {
-    margin: 10px;
-    width: 110px;
-    height: 80px;
-    display: flex;
-    border: 2px solid black;
-    justify-content: center;
-    align-items: center;
-    font-size: 35px;
+    border-radius: 6px;
+    box-shadow: 0 0 60px rgba(0,0,0,0.9);
 }
 
 .playground {
@@ -211,16 +186,276 @@
     display: flex;
     z-index: 0;
     background-size: cover;
-    background-image: url(./img/home.jpg);
+    background-color: #2a1f10;
+    border-radius: 6px;
 }
 
+/* ================================================================ INVENTORY */
 
-/* _________________________________________________________________________________________________________________________HOME LOCATION */
+.inventoryTitle {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    width: 218px;
+    height: 40px;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 14px;
+    font-family: Georgia, serif;
+    letter-spacing: 2px;
+    color: #f4d060;
+    text-shadow: 0 0 10px rgba(200,150,30,0.5);
+    background: linear-gradient(160deg, rgba(40,22,6,0.96), rgba(65,35,10,0.96));
+    border: 1.5px solid #c8961e;
+    border-radius: 8px 8px 0 0;
+    cursor: pointer;
+}
+
+.inventory {
+    position: absolute;
+    top: 38px;
+    left: -1.5px;
+    width: calc(100% + 3px);
+    padding: 8px 7px 10px;
+    z-index: 5;
+    display: none;
+    flex-wrap: wrap;
+    gap: 5px;
+    background: linear-gradient(180deg, rgba(28,14,3,0.97), rgba(48,24,5,0.97));
+    border: 1.5px solid #c8961e;
+    border-top: none;
+    border-radius: 0 0 8px 8px;
+    min-height: 10px;
+}
+
+.inventoryTitle:hover .inventory {
+    display: flex;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+}
+
+/* каждый слот — невидимый по умолчанию */
+.items {
+    width: 63px;
+    height: 63px;
+    position: relative;
+    border: 1.5px solid transparent;
+    border-radius: 7px;
+    background-color: transparent;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: opacity 0.25s ease, transform 0.25s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+    pointer-events: none;
+    cursor: pointer;
+}
+
+/* слот с предметом — появляется */
+.items.has-item {
+    background: linear-gradient(145deg, #1e0f04, #3a1e08);
+    border-color: #8a6020;
+    opacity: 1;
+    transform: scale(1);
+    pointer-events: all;
+}
+
+.items.has-item:hover {
+    border-color: #f0d060;
+    box-shadow: 0 0 12px rgba(240,200,60,0.4);
+    transform: scale(1.1);
+    z-index: 1;
+}
+
+@keyframes itemPop {
+    0%   { transform: scale(0.4); opacity: 0; }
+    65%  { transform: scale(1.18); }
+    100% { transform: scale(1);    opacity: 1; }
+}
+
+.items.item-pop {
+    animation: itemPop 0.35s ease forwards;
+}
+
+.item-count {
+    position: absolute;
+    bottom: -5px;
+    right: -5px;
+    min-width: 20px;
+    height: 20px;
+    padding: 0 5px;
+    background: linear-gradient(160deg, #5a3200, #8a5000);
+    border: 1.5px solid #e8b820;
+    border-radius: 10px;
+    color: #fff8d0;
+    font-size: 12px;
+    font-weight: bold;
+    font-family: Georgia, serif;
+    text-align: center;
+    line-height: 17px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.7);
+    pointer-events: none;
+}
+
+.item-name {
+    position: absolute;
+    top: 2px;
+    left: 0;
+    right: 0;
+    color: #d4a060;
+    font-size: 8px;
+    text-align: center;
+    text-shadow: 0 1px 2px rgba(0,0,0,0.9);
+    pointer-events: none;
+    white-space: nowrap;
+    overflow: hidden;
+}
+
+.item-emoji {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -46%);
+    font-size: 28px;
+    pointer-events: none;
+    line-height: 1;
+}
+
+/* ================================================================ STATS */
+
+.stats {
+    position: absolute;
+    left: 248px;
+    top: 12px;
+    z-index: 5;
+    width: 310px;
+    padding: 9px 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    background: linear-gradient(160deg, rgba(40,22,6,0.96), rgba(65,35,10,0.96));
+    border: 1.5px solid #c8961e;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+}
+
+.statRow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.statIcon {
+    font-size: 16px;
+    min-width: 22px;
+    text-align: center;
+    filter: drop-shadow(0 1px 2px rgba(0,0,0,0.8));
+}
+
+.statValue {
+    min-width: 24px;
+    text-align: right;
+    font-size: 12px;
+    color: #c8a060;
+    font-family: Georgia, serif;
+}
+
+.status {
+    flex: 1;
+    height: 20px;
+    background-color: rgba(0,0,0,0.55);
+    border-radius: 10px;
+    border: 1px solid rgba(160,112,48,0.45);
+    overflow: hidden;
+}
+
+.hunger-bar {
+    background-color: #2ecc71;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+.energy-bar {
+    background-color: #3498db;
+    height: 100%;
+    border-radius: 10px;
+    transition: width 0.4s ease, background-color 0.4s ease;
+}
+
+/* ================================================================ HUD PANELS (days, gold) */
+
+.hud-panel {
+    position: absolute;
+    z-index: 5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Georgia, serif;
+    background: linear-gradient(160deg, rgba(40,22,6,0.96), rgba(65,35,10,0.96));
+    border: 1.5px solid #c8961e;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    color: #f4d060;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.7);
+}
+
+.days {
+    top: 12px;
+    left: 576px;
+    width: 150px;
+    height: 40px;
+    font-size: 18px;
+    letter-spacing: 1px;
+}
+
+.gold {
+    top: 12px;
+    left: 740px;
+    width: 170px;
+    height: 40px;
+    font-size: 18px;
+    font-weight: bold;
+    background: linear-gradient(160deg, rgba(80,50,0,0.96), rgba(120,75,5,0.96));
+    border-color: #e8b820;
+    color: #fff0a0;
+    text-shadow: 0 0 12px rgba(255,200,40,0.45);
+}
+
+/* ================================================================ RESET BUTTON */
+
+.resetBtn {
+    position: absolute;
+    z-index: 5;
+    top: 12px;
+    left: 924px;
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(160deg, rgba(90,20,20,0.96), rgba(140,30,30,0.96));
+    color: #ffaaaa;
+    border: 1.5px solid #c04040;
+    border-radius: 8px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: all 0.15s ease;
+}
+
+.resetBtn:hover {
+    background: linear-gradient(160deg, rgba(160,30,30,0.96), rgba(200,45,45,0.96));
+    border-color: #ff6060;
+    color: #ffffff;
+    transform: scale(1.1);
+}
+
+/* ================================================================ HOME LOCATION */
 
 .trees {
     width: 1967px;
     height: 686px;
     background-image: url(./img/homeItems/trees.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 132px;
     top: 80px;
@@ -231,26 +466,31 @@
     width: 315px;
     height: 135px;
     background-image: url(./img/homeItems/hammock.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 265px;
     top: 580px;
     z-index: 2;
+    cursor: pointer;
 }
 
 .boiler {
     width: 204px;
     height: 211px;
     background-image: url(./img/homeItems/boiler.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 740px;
     top: 540px;
     z-index: 3;
+    cursor: pointer;
 }
 
 .fire {
     width: 55px;
     height: 85px;
     background-image: url(./img/homeItems/fire.gif);
+    background-repeat: no-repeat;
     position: absolute;
     left: 818px;
     top: 655px;
@@ -262,18 +502,21 @@
     width: 115px;
     height: 135px;
     background-image: url(./img/homeItems/blueprint.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 1500px;
     top: 490px;
     z-index: 2;
+    cursor: pointer;
 }
 
 .skyHome {
     width: 168px;
     height: 62px;
     background-image: url(./img/homeItems/sky.png);
+    background-repeat: no-repeat;
     position: absolute;
-    right:700px ;
+    right: 700px;
     top: 100px;
     z-index: 1;
 }
@@ -282,40 +525,109 @@
     width: 162px;
     height: 279px;
     background-image: url(./img/pointer.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 70px;
-    top: 490px;
+    top: 510px;
     z-index: 3;
+    cursor: pointer;
 }
 
 .birdsHome {
     width: 135px;
     height: 60px;
     background-image: url(./img/homeItems/birds.gif);
+    background-repeat: no-repeat;
     position: absolute;
-    left: -135px ;
+    left: -135px;
     top: 130px;
     z-index: 1;
     animation: birdsHome 50s infinite linear;
 }
 
 @keyframes birdsHome {
-    0% {
-        transform: translate(0%);
-    }    
-    100% {
-        transform: translate(+1965px);
-    }
+    0%   { transform: translate(0%);      }
+    100% { transform: translate(+1965px); }
 }
 
+/* ================================================================ GNOME */
 
-/* __________________________________________________________________________________________________________________________MINE LOCATION */
+.gnomePlace {
+    position: absolute;
+    left: 200px;
+    top: 330px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+}
 
+.gnomePlace::after {
+    content: '';
+    display: block;
+    width: 80px;
+    height: 60px;
+    background: url('./img/mineItems/cartFullG.gif') center/contain no-repeat;
+}
+
+.gnomeTimer {
+    background: rgba(20, 12, 5, 0.85);
+    border: 1.5px solid #c8920a;
+    color: #f4d060;
+    font-family: Georgia, serif;
+    font-size: 18px;
+    font-weight: bold;
+    padding: 2px 10px;
+    border-radius: 6px;
+    letter-spacing: 2px;
+    min-width: 36px;
+    text-align: center;
+}
+
+/* ================================================================ MINE TIMER */
+
+.mineTimer {
+    position: absolute;
+    left: 50%;
+    top: 460px;
+    transform: translateX(-50%);
+    z-index: 4;
+    font-family: Georgia, serif;
+    font-size: 32px;
+    font-weight: bold;
+    letter-spacing: 3px;
+    color: transparent;
+    pointer-events: none;
+    opacity: 0;
+    padding: 0 24px;
+    height: 52px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 8px;
+    border: 1.5px solid transparent;
+    background: transparent;
+    transition: opacity 0.3s ease;
+    white-space: nowrap;
+}
+
+.mineTimer.active {
+    opacity: 1;
+    color: #f4d060;
+    text-shadow: 0 0 12px rgba(200,150,20,0.6);
+    background: linear-gradient(160deg, rgba(40,22,6,0.96), rgba(65,35,10,0.96));
+    border-color: #c8961e;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.5);
+}
+
+/* ================================================================ MINE LOCATION */
 
 .skyMine {
     width: 433px;
     height: 82px;
     background-image: url(./img/mineItems/skyMine.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: -433px;
     top: 150px;
@@ -324,18 +636,15 @@
 }
 
 @keyframes skyMine {
-    0% {
-        transform: translate(0%);
-    }    
-    100% {
-        transform: translate(+530%);
-    }
+    0%   { transform: translate(0%);    }
+    100% { transform: translate(+530%); }
 }
 
 .mineBack {
     width: 903px;
     height: 668px;
     background-image: url(./img/mineItems/mineBack.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 930px;
     top: 50px;
@@ -346,6 +655,7 @@
     width: 505px;
     height: 629px;
     background-image: url(./img/mineItems/mineFront.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 1330px;
     top: 270px;
@@ -360,16 +670,18 @@
     top: 540px;
     z-index: 2;
     display: flex;
+    cursor: pointer;
 }
 
 .pointerMine {
-    
     width: 162px;
     height: 279px;
     background-image: url(./img/pointer.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 75px;
     top: 360px;
+    cursor: pointer;
 }
 
 .carts {
@@ -377,62 +689,43 @@
     height: 184px;
     background-image: url(./img/mineItems/cart.png);
     background-repeat: no-repeat;
+    background-repeat: no-repeat;
     background-position: bottom;
 }
 
-
 @keyframes cartToLeft {
-    
-    0% {
-        background-image: url(./img/mineItems/cartG.gif);
-    }
-    100% {
-        transform: translate( +500%);
-        background-image: url(./img/mineItems/cartG.gif);
-    }
+    0%   { transform: translate(0%);    }
+    100% { transform: translate(+500%); }
 }
 
 @keyframes cartToRight {
-    
-    0% {
-        transform: translate( +500%);
-        background-image: url(./img/mineItems/cartFullG.gif);;
-    }
-    100% {
-        transform: translate( 0%);
-        background-image: url(./img/mineItems/cartFullG.gif);;
-
-    }
+    0%   { transform: translate(+500%); }
+    100% { transform: translate(0%);    }
 }
 
-
-
-/* __________________________________________________________________________________________________________________________FARM LOCATION */
+/* ================================================================ FARM LOCATION */
 
 .skyFarm {
     width: 656px;
     height: 131px;
     background-image: url(./img/farmItems/sky.png);
+    background-repeat: no-repeat;
     position: absolute;
     top: 80px;
     right: -656px;
     animation: skyFarm 100s infinite linear;
-
 }
 
 @keyframes skyFarm {
-    0% {
-        transform: translate(0%);
-    }    
-    100% {
-        transform: translate(-380%);
-    }
+    0%   { transform: translate(0%);    }
+    100% { transform: translate(-380%); }
 }
 
 .windmill {
     width: 104px;
     height: 98px;
     background-image: url(./img/farmItems/windmill.png);
+    background-repeat: no-repeat;
     position: absolute;
     left: 1270px;
     top: 310px;
@@ -440,14 +733,8 @@
 }
 
 @keyframes rotate {
-    0% {
-        transform: rotate(0deg);
-    }
-
-    100% {
-        transform: rotate(-360deg);
-    }
-
+    0%   { transform: rotate(0deg);    }
+    100% { transform: rotate(-360deg); }
 }
 
 .seedbeds {
@@ -468,17 +755,19 @@
     left: 350px;
     top: 300px;
     background-image: url(./img/farmItems/stickman.png);
-    /* display: none; */
+    background-repeat: no-repeat;
 }
 
 .pointerFarm {
     width: 162px;
     height: 279px;
     background-image: url(./img/pointer.png);
+    background-repeat: no-repeat;
     position: absolute;
     right: 205px;
     top: 375px;
     z-index: 3;
+    cursor: pointer;
 }
 
 .seed {
@@ -486,32 +775,193 @@
     height: 186px;
     background-image: url(./img/farmItems/seed.png);
     background-repeat: no-repeat;
+    background-repeat: no-repeat;
     background-position: bottom;
+    cursor: pointer;
+    transition: transform 0.15s;
 }
 
-/* ____________________________________________________________________________________________________________________________FISH LOCATION */
+.seed:hover {
+    transform: scale(1.05);
+}
 
+.seed.ready-to-harvest {
+    animation: pulse 1s infinite alternate;
+}
 
-.fishing {
-    width: 200px;
-    height: 100px;
-    background-color: aqua;
-    position: absolute;
-    left: 700px;
-    top: 700px;
-    border: 10px solid black;
+.seed.seed-locked {
+    opacity: 0.25;
+    filter: grayscale(1);
+    cursor: default;
+    pointer-events: none;
+}
+
+.seed.seed-locked:hover {
+    transform: none;
+}
+
+@keyframes pulse {
+    0%   { filter: brightness(1);   }
+    100% { filter: brightness(1.4); }
 }
 
 
-
-/* __________________________________________________________________________________________________________________________MARKET LOCATION */
-
-.market {
-    width: 200px;
-    height: 100px;
-    background-color: aqua;
+.farmGnomePlace {
     position: absolute;
-    left: 650px;
+    left: 155px;
+    top: 560px;
+    width: 70px;
+    height: 70px;
+    background: url('./img/mineItems/cartFullG.gif') center/contain no-repeat;
+    z-index: 2;
+}
+
+
+/* ================================================================ FISHING LOCATION */
+
+.pointerFishing {
+    width: 162px;
+    height: 279px;
+    background-image: url(./img/pointer.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 70px;
+    top: 490px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.fishingArea {
+    position: absolute;
+    left: 600px;
+    top: 500px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.fishingBtn {
+    width: 260px;
+    height: 72px;
+    background: linear-gradient(160deg, #1a4a7e, #1a6a9e);
+    color: #c8e8ff;
+    font-size: 22px;
+    font-family: Georgia, serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #4090cc;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    transition: all 0.15s ease;
+}
+
+.fishingBtn:hover {
+    background: linear-gradient(160deg, #1a6a9e, #2090cc);
+    transform: scale(1.04);
+}
+
+.fishingProgress {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+}
+
+.fishingBar {
+    width: 420px;
+    height: 32px;
+    background-color: rgba(0,0,0,0.6);
+    border: 2px solid #4090cc;
+    position: relative;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: inset 0 2px 4px rgba(0,0,0,0.5);
+}
+
+.fishingZone {
+    position: absolute;
+    width: 20%;
+    height: 100%;
+    background-color: rgba(0, 220, 80, 0.45);
+    top: 0;
+    border-radius: 0;
+}
+
+.fishingMarker {
+    position: absolute;
+    width: 5px;
+    height: 100%;
+    background-color: #fff;
+    top: 0;
+    box-shadow: 0 0 8px rgba(255,255,255,0.8);
+}
+
+.fishingCatch {
+    width: 260px;
+    height: 64px;
+    background: linear-gradient(160deg, #8b2010, #c0392b);
+    color: white;
+    font-size: 26px;
+    font-weight: bold;
+    font-family: Georgia, serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid #e05030;
+    cursor: pointer;
+    border-radius: 8px;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.4);
+    transition: all 0.15s ease;
+    letter-spacing: 1px;
+}
+
+.fishingCatch:hover {
+    background: linear-gradient(160deg, #c0392b, #e74c3c);
+    transform: scale(1.04);
+}
+
+/* ================================================================ MARKET LOCATION */
+
+.pointerMarket {
+    width: 162px;
+    height: 279px;
+    background-image: url(./img/pointer.png);
+    background-repeat: no-repeat;
+    position: absolute;
+    left: 70px;
+    top: 490px;
+    z-index: 3;
+    cursor: pointer;
+}
+
+.marketStall {
+    position: absolute;
+    left: 580px;
     top: 450px;
-    border: 10px solid black;
+    width: 300px;
+    height: 90px;
+    background: linear-gradient(160deg, rgba(120,80,10,0.9), rgba(180,120,20,0.9));
+    border: 2px solid #e8b820;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 24px;
+    font-family: Georgia, serif;
+    font-weight: bold;
+    color: #fff8e0;
+    text-shadow: 0 1px 4px rgba(0,0,0,0.6);
+    cursor: pointer;
+    z-index: 2;
+    border-radius: 8px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.4);
+    transition: all 0.15s ease;
+}
+
+.marketStall:hover {
+    background: linear-gradient(160deg, rgba(160,110,20,0.95), rgba(210,150,30,0.95));
+    transform: scale(1.03);
 }
