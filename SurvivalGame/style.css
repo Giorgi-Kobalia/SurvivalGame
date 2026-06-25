@@ -235,7 +235,6 @@ body {
     box-shadow: 0 8px 24px rgba(0,0,0,0.5);
 }
 
-/* каждый слот — невидимый по умолчанию */
 .items {
     width: 63px;
     height: 63px;
@@ -250,7 +249,6 @@ body {
     cursor: pointer;
 }
 
-/* слот с предметом — появляется */
 .items.has-item {
     background: linear-gradient(145deg, #1e0f04, #3a1e08);
     border-color: #8a6020;
