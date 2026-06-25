@@ -4,7 +4,7 @@ import { FarmSystem } from './farm-system.js';
 import { pg, showModal, hideModal, showNotification } from './ui.js';
 
 export function renderFarm() {
-    pg.style.backgroundImage = "url(./img/Farm.jpg)";
+    pg.style.backgroundImage = "url(./img/farm.jpg)";
     const activeSlots = CONFIG.FARM_PLOT_LEVELS[GameState.farmPlotLevel].slots;
     let seedsHTML = "";
     for (let i = 0; i < CONFIG.FARM_SLOTS; i++) {

@@ -1,7 +1,7 @@
 import { pg } from './ui.js';
 
 export function renderHome() {
-    pg.style.backgroundImage = "url(./img/Home.jpg)";
+    pg.style.backgroundImage = "url(./img/home.jpg)";
     pg.innerHTML =
         '<div class="trees"></div>' +
         '<div class="blueprint" data-action="open-upgrades"></div>' +
