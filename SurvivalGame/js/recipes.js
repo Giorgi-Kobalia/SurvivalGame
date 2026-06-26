@@ -1,15 +1,21 @@
-import { RECIPES, ITEMS } from './config.js';
+import { RECIPES, ITEMS, CROP_EMOJI } from './config.js';
 import { Inventory } from './inventory.js';
-import { showModal, hideModal, showNotification } from './ui.js';
+import { showModal, showNotification } from './ui.js';
+import { startCooking, isCooking, isCookingReady, collectCooking } from './cooking.js';
+
+function ingredientEmoji(item) {
+    return CROP_EMOJI[item] || ITEMS[item].emoji || ITEMS[item].name;
+}
 
 export function showRecipes() {
     const buttons = Object.keys(RECIPES).map((id) => {
         const r = RECIPES[id];
-        const needs = Object.keys(r.needs).map((item) => ITEMS[item].name + " x" + r.needs[item]).join(", ");
+        const needs = Object.keys(r.needs).map((item) => ingredientEmoji(item) + r.needs[item]).join(" ");
         const canCraft = Object.keys(r.needs).every((item) => Inventory.getCount(item) >= r.needs[item]);
         const cls = canCraft ? "modalButtons" : "modalButtons disabled";
         const attrs = canCraft ? 'data-action="craft-recipe" data-id="' + id + '"' : "";
         return '<div class="' + cls + '" ' + attrs + '>' +
+                   '<span class="recipeHeals">+' + r.heals + '</span>' +
                    r.name + '<br><small>' + needs + '</small>' +
                '</div>';
     }).join("");
@@ -18,11 +24,15 @@ export function showRecipes() {
 }
 
 export function handleCraftRecipe(id) {
-    const recipe = RECIPES[id];
-    for (const item in recipe.needs) {
-        Inventory.removeItem(item, recipe.needs[item]);
+    startCooking(id);
+}
+
+export function handleBoilerClick() {
+    if (isCookingReady()) {
+        collectCooking();
+    } else if (isCooking()) {
+        showNotification("Still cooking...");
+    } else {
+        showRecipes();
     }
-    Inventory.addItem(recipe.result, 1);
-    hideModal();
-    showNotification("Ready: " + recipe.name + "! (click the slot to eat)");
 }

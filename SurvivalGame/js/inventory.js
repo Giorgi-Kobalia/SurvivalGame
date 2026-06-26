@@ -33,7 +33,10 @@ export const Inventory = {
             if (this.slots[i] && this.slots[i].id === id) {
                 if (this.slots[i].count < count) return false;
                 this.slots[i].count -= count;
-                if (this.slots[i].count === 0) this.slots[i] = null;
+                if (this.slots[i].count === 0) {
+                    this.slots.splice(i, 1);
+                    this.slots.push(null);
+                }
                 this.render();
                 saveGame();
                 return true;

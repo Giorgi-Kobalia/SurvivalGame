@@ -8,7 +8,7 @@ import { handleMineClick, startMiner, stopMiner } from './mine.js';
 import { handleSeedClick, handlePlantCrop } from './farm-screen.js';
 import { handleStartFishing, handleCatchFish } from './fishing.js';
 import { showMarketModal, handleSellItem } from './market.js';
-import { showRecipes, handleCraftRecipe } from './recipes.js';
+import { handleBoilerClick, handleCraftRecipe } from './recipes.js';
 import { showUpgrades, handleBuyUpgrade, handleBuyFarmUpgrade } from './upgrades.js';
 import { teleportTo, goToSleep, showTeleportsModal } from './teleport.js';
 
@@ -34,7 +34,7 @@ const ACTIONS = {
     "teleport":        (el) => teleportTo(el.dataset.target),
     "sleep":           () => goToSleep(),
     "open-upgrades":   () => showUpgrades(),
-    "open-recipes":    () => showRecipes(),
+    "open-recipes":    () => handleBoilerClick(),
     "mine":            () => handleMineClick(),
     "seed-click":      (el) => handleSeedClick(Number(el.dataset.index)),
     "plant":           (el) => handlePlantCrop(Number(el.dataset.index), el.dataset.crop),

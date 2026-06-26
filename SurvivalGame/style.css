@@ -74,6 +74,7 @@ body {
 }
 
 .modalButtons {
+    position: relative;
     width: 120px;
     height: 90px;
     display: flex;
@@ -89,6 +90,14 @@ body {
     color: #f4d060;
     background: linear-gradient(160deg, #3d2010, #5a3018);
     transition: all 0.15s ease;
+}
+
+.recipeHeals {
+    position: absolute;
+    top: 4px;
+    right: 6px;
+    font-size: 12px;
+    color: #6fcf6f;
 }
 
 .modalButtons:hover {
@@ -482,6 +491,33 @@ body {
     top: 540px;
     z-index: 3;
     cursor: pointer;
+}
+
+.boiler.ready-to-collect {
+    animation: pulse 1s infinite alternate;
+}
+
+.cookingTimer {
+    position: absolute;
+    left: 740px;
+    width: 204px;
+    top: 500px;
+    z-index: 4;
+    font-family: Georgia, serif;
+    font-size: 28px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-align: center;
+    color: transparent;
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.cookingTimer.active {
+    opacity: 1;
+    color: #f4d060;
+    text-shadow: 0 0 12px rgba(200,150,20,0.6);
 }
 
 .fire {
